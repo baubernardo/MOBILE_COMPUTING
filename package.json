@@ -1,0 +1,10 @@
+{
+  "name": "week-01-app-ideas",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Week 01 app ideas template. Mobile Systems 2026",
+  "scripts": {
+    "check": "node scripts/public-checks.mjs",
+    "ci": "node scripts/public-checks.mjs"
+  }
+}
