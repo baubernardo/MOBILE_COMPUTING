@@ -1,73 +1,72 @@
-# Week 01: App ideas + GitHub onboarding (template)
+# 📱 iStock - Gestão de Estoque, Encomendas e Vendas de iPhone
 
-**Mobile Systems 2026 · Week 01**  
-**GitHub template:** https://github.com/claudioscheer/mobile-dev-class-2026-week-01-app-ideas
-
-This template is markdown only. No app code required.
-
-| Field | Value |
-| --- | --- |
-| **Deadline** | **2026-08-09 23:59 America/Sao_Paulo (BRT)** |
-| **Your repo must be** | **Private** |
-| **Invite collaborator** | **`claudioscheer`** |
-| **Points** | 50 |
-| **What we grade** | Last commit on `main` **≤ deadline** (commits after deadline are ignored) |
-
-Full brief (when using the course hub): `evaluations/week-01-app-ideas/ASSIGNMENT.md`
+Aplicativo em **React Native** com **Expo Go (SDK 52)** projetado especialmente para lojas de iPhone, assistência técnica e revendedores Apple.
 
 ---
 
-## Hard rules
+## 🚀 Como Executar no Expo Go
 
-```text
-No eligible commit on main by the deadline  →  0
-Commits after the deadline                  →  ignored
-Public student repo                         →  0
-claudioscheer cannot access the repo        →  0 (evaluation disregarded)
-Bad / missing private repo URL on form      →  0
-```
+1. **Inicie o servidor de desenvolvimento**:
+   ```bash
+   npm start
+   ```
 
-You do **not** submit a commit SHA. The instructor grades the last `main` commit at or before the deadline and records that SHA when reviewing.
-
-1. Create this as a **private** repository (Use this template → **Private**).
-2. Invite **`claudioscheer`** (Settings → Collaborators) and confirm access.
-3. Fill [`IDEAS.md`](./IDEAS.md) with **three** app ideas.
-4. Commit and push to **`main` on your private repo**, keep CI green before the deadline.
-5. Submit the course form with **private repo URL** before the deadline.
-
-After the deadline, the public template will be **closed / set private**. Late commits on your repo still **do not count**.
+3. **Abra no seu celular**:
+   - **iOS**: Abra a câmera nativa do iPhone e aponte para o QR Code gerado no terminal.
+   - **Android**: Abra o aplicativo **Expo Go** e escaneie o QR Code.
 
 ---
 
-## What you do
+## ✨ Funcionalidades Principais
 
-1. **Private** repo from this template.
-2. Collaborator: **`claudioscheer`**.
-3. Complete [`IDEAS.md`](./IDEAS.md).
-4. Commit & push to `main` → CI green by **2026-08-09 23:59 BRT**.
-5. Form: name, GitHub username, week `01`, private repo URL.
+### 1. 📦 Gestão de Estoque Atual
+- Cadastro completo de iPhones:
+  - Modelo (do iPhone 11 ao iPhone 16 Pro Max)
+  - Capacidade de Armazenamento (64GB, 128GB, 256GB, 512GB, 1TB)
+  - Cores originais Apple (Titânio Deserto, Titânio Natural, Meia-noite, etc.)
+  - Saúde da Bateria (%) com indicador visual colorido inteligente
+  - Condição do aparelho (Novo / Lacrado, Seminovo Grade A+, Grade A, Grade B)
+  - IMEI / Número de Série
+  - Preço de Custo, Preço de Venda e Margem de Lucro prevista
+  - Fornecedor e Observações detalhadas
+- Filtros rápidos: Todos, Disponíveis, Reservados e Vendidos.
+- Filtro por condição (Lacrados vs Seminovos).
+- Busca em tempo real por Modelo, IMEI, Cor ou Fornecedor.
+- Ação rápida de **Vender**, **Editar**, **Excluir** e **Compartilhar Oferta no WhatsApp**.
 
-## Stack note (semester)
+### 2. 🚚 Controle de Encomendas (Pre-orders)
+- Registro de pedidos sob demanda com adiantamento/sinal:
+  - Nome e WhatsApp do Cliente (com atalho direto para conversar no WhatsApp)
+  - Modelo, Capacidade, Cor e Condição solicitada
+  - Valor Total Acordado, Sinal Pago e Saldo Restante calculado automaticamente
+  - Previsão de Entrega e Fornecedor/Rastreio
+- Fluxo de Status:
+  - `Pendente` ➜ `A Caminho` ➜ `No Estoque (Recebido)` ➜ `Entregue ao Cliente`
+- Botão direto para **Receber no Estoque** (transfere automaticamente o aparelho para a aba de Estoque).
+- Botão para **Concluir Venda/Entrega**.
 
-**React Native (Expo) + TypeScript.**  
-Do **not** install or code React Native for Week 01.
+### 3. 💰 Registro de Vendas & Lucro Líquido
+- Histórico completo de vendas realizadas.
+- Métricas de faturamento total, lucro realizado e ticket médio.
+- Formas de pagamento: Pix, Cartão de Crédito (com parcelamento em até 18x), Débito, Dinheiro e Misto.
+- **Gerador de Comprovante / Recibo de Venda** compartilhável diretamente via WhatsApp ou redes sociais.
 
-## Checks
+### 4. 📊 Dashboard de Indicadores
+- Valuation total do estoque (Preço de Custo vs Valor de Venda esperado).
+- Lucro projetado no estoque atual.
+- Total de sinais de clientes retidos em caixa.
+- Gráfico de distribuição de modelos mais frequentes no estoque.
+- Distribuição de saúde de bateria dos iPhones em estoque (100%, 90-99%, <90%).
+- Botão para restaurar os dados de exemplo/demonstração a qualquer momento.
 
-No dependencies:
+---
 
-```bash
-node scripts/public-checks.mjs
-# or: npm run check
-```
+## 🛠️ Tecnologias Utilizadas
 
-CI: `node:20-alpine`, no `npm install`.
-
-## Submit
-
-| Field | Example |
-| --- | --- |
-| Name | your name |
-| GitHub username | your handle |
-| Week | `01` |
-| Private repo URL | `https://github.com/you/your-private-week01` |
+- **Expo SDK 57**
+- **React Native 0.86 / React 19**
+- **TypeScript**
+- **AsyncStorage** para persistência 100% offline
+- **React Native Safe Area Context**
+- **Expo Vector Icons** (Ionicons)
+- **Expo Sharing**
