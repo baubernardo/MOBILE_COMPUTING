@@ -9,8 +9,8 @@ import { StockItem, PreOrderItem, SaleItem, DashboardMetrics, OrderStatus } from
  * - Celular Físico no Expo Go: altere para o IP local do seu computador (ex: http://192.168.1.15:3000)
  */
 export const API_CONFIG = {
-  // Altere para o IP do seu computador se for testar no celular físico via Expo Go
-  LOCAL_NETWORK_IP: 'localhost',
+  // IP da máquina na rede local para conexão perfeita via Expo Go no celular físico
+  LOCAL_NETWORK_IP: '10.5.136.32',
   PORT: 3000,
   TIMEOUT_MS: 3500,
 
