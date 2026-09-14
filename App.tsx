@@ -18,7 +18,7 @@ type TabType = 'stock' | 'orders' | 'sales' | 'dashboard';
 
 function MainApp() {
   const [activeTab, setActiveTab] = useState<TabType>('stock');
-  const { stock, orders, addStockItem, addPreOrderItem, registerSale } = useApp();
+  const { stock, orders, addStockItem, addPreOrderItem, registerSale, backendMode, checkBackendConnection } = useApp();
 
   // Quick modals state from Dashboard shortcuts
   const [isAddStockOpen, setIsAddStockOpen] = useState(false);
@@ -34,6 +34,26 @@ function MainApp() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
       <StatusBar style="light" />
+
+      {/* Database Connection Pill */}
+      <View style={styles.connectionBar}>
+        <TouchableOpacity
+          style={styles.connectionPill}
+          onPress={checkBackendConnection}
+          activeOpacity={0.7}
+        >
+          <View
+            style={[
+              styles.connectionDot,
+              { backgroundColor: backendMode === 'api' ? Colors.success : Colors.textMuted },
+            ]}
+          />
+          <Text style={styles.connectionText}>
+            {backendMode === 'api' ? 'PostgreSQL Online' : 'Modo Local (Offline)'}
+          </Text>
+          <Ionicons name="refresh" size={10} color={Colors.textMuted} style={{ marginLeft: 4 }} />
+        </TouchableOpacity>
+      </View>
 
       {/* Screen Content */}
       <View style={styles.content}>
@@ -228,5 +248,33 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 9,
     fontWeight: '800',
+  },
+  connectionBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 3,
+    backgroundColor: Colors.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.border,
+  },
+  connectionPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 12,
+    backgroundColor: Colors.surfaceCard,
+  },
+  connectionDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginRight: 6,
+  },
+  connectionText: {
+    fontSize: 10,
+    fontWeight: '600',
+    color: Colors.textSecondary,
   },
 });

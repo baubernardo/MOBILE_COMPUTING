@@ -1,0 +1,51 @@
+services:
+  # 1. Banco de Dados Relacional PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: istock_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-istock_db}
+    ports:
+      # Mapeado por padrão na porta 5433 do host para não colidir com outros bancos locais
+      - "${DB_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-istock_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Backend REST API em Node.js / TypeScript
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: istock_api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-istock_db}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # 3. Interface Web para Visualizar o Banco (Adminer)
+  adminer:
+    image: adminer:latest
+    container_name: istock_adminer
+    restart: unless-stopped
+    ports:
+      - "${ADMINER_PORT:-8080}:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    name: istock_postgres_data
